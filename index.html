@@ -27,12 +27,31 @@
             <div class="nav-cta">
                 <a href="#contact" class="btn btn-primary">Contact Us</a>
             </div>
-            <!-- Mobile Menu Toggle (Optional but good for completeness) -->
-            <button class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle" id="menu-open">
+                <img src="assets/images/menu-01.png" alt="Open Menu">
             </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-overlay" id="mobile-overlay">
+            <div class="overlay-header">
+                <a href="#" class="logo">Tech.</a>
+                <button class="menu-toggle" id="menu-close">
+                    <img src="assets/images/x-close.png" alt="Close Menu">
+                </button>
+            </div>
+            <nav class="overlay-links">
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Service</a></li>
+                    <li><a href="#work">Our Work</a></li>
+                    <li><a href="#team">Team</a></li>
+                </ul>
+                <div class="overlay-cta">
+                    <a href="#contact" class="btn btn-primary btn-full">Contact Us</a>
+                </div>
+            </nav>
         </div>
     </header>
 
@@ -216,16 +235,34 @@
         </div>
     </footer>
 
-    <!-- Optional: JS for mobile menu toggle -->
+    <!-- Script for mobile menu toggle -->
     <script>
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
+        const menuOpen = document.getElementById('menu-open');
+        const menuClose = document.getElementById('menu-close');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const overlayLinks = document.querySelectorAll('.overlay-links a');
 
-        if (mobileMenu) {
-            mobileMenu.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
+        if (menuOpen && mobileOverlay) {
+            menuOpen.addEventListener('click', () => {
+                mobileOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
             });
         }
+
+        if (menuClose && mobileOverlay) {
+            menuClose.addEventListener('click', () => {
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        }
+
+        // Close menu when clicking a link
+        overlayLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
     </script>
 </body>
 </html>
